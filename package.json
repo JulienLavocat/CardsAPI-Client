@@ -1,0 +1,25 @@
+{
+  "name": "cardsapi-client",
+  "version": "1.0.0",
+  "description": "CardsAPI client",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulienLavocat/CardsAPI-Client.git"
+  },
+  "keywords": [
+    "*"
+  ],
+  "author": "Julien Lavocat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulienLavocat/CardsAPI-Client/issues"
+  },
+  "homepage": "https://github.com/JulienLavocat/CardsAPI-Client#readme",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
