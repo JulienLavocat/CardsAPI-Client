@@ -4,7 +4,7 @@ declare class CardsClient {
 	 * Creates a new CardsClient, using host as base url
 	 * @param host url base where the api listen (ex: https://example.com)
 	 */
-	new(host: String): CardsClient;
+	constructor(host: String);
 
 	/**
 	 * Create a new deck from a given deck type
