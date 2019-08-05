@@ -122,6 +122,39 @@ interface Deck {
 
 interface Pile {
 
+	/**
+	 * Id of the deck that this pile belongs to
+	 */
+	deckId: String;
+	/**
+	 * Remaining cards in pile
+	 */
+	remaining: Number;
+	/**
+	 * Name of the pile
+	 */
+	name: String;
+
+	/**
+	 * Add cards to pile
+	 * @param cards cards to add to pile
+	 */
+	add(cards: String[]): Promise<Pile>;
+	/**
+	 * Shuffle the pile
+	 */
+	shuffle(): Promise<Pile>;
+	/**
+	 * Draw one or more cards
+	 * @param amount Amount of cards to draw, defaults to 1
+	 */
+	draw(amount?: Number): Promise<String[]>;
+	/**
+	 * Draw one or more cards at the bottom of the pile
+	 * @param amount Amount of cards to draw, defaults to 1
+	 */
+	drawBottom(amount?: Number): Promise<String[]>;
+
 }
 
 export = CardsClient;
