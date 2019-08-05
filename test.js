@@ -7,7 +7,7 @@ start();
 async function start() {
 	try {
 		let deck = await cardsClient
-			.createDeck("custom")
+			.createDeck("standard")
 			.cards(["J"])
 			.deckCount(3)
 			.password("test")
