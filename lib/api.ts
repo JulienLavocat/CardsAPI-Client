@@ -1,40 +1,43 @@
-const Axios = require("./axios");
+import Axios from "./axios";
 
 class API {
+
+	axios: Axios;
+
 	constructor(url) {
 		this.axios = new Axios(url);
 	}
 
-	newDeck(query) {
+	newDeck(query: String) {
 		return this.axios.get(`/decks/new${query}`);
 	}
-	getDeck(id, password) {
+	getDeck(id: String, password: String) {
 		return this.axios.get(`/decks/${id}?${password}`);
 	}
-	shuffleDeck(id, password) {
+	shuffleDeck(id: String, password: String) {
 		return this.axios.get(`/decks/${id}/shuffle?${password}`)
 	}
-	drawDeck(id, amount, password) {
+	drawDeck(id: String, amount: Number, password: String) {
 		return this.axios.get(`/decks/${id}/draw?amount=${amount}&${password}`);
 	}
-	drawBottomDeck(id, amount, password) {
+	drawBottomDeck(id: String, amount: Number, password: String) {
 		return this.axios.get(`/decks/${id}/draw/bottom?amount=${amount}&${password}`);
 	}
-	getPile(id, name, password) {
+	getPile(id: String, name: String, password: String) {
 		return this.axios.get(`/decks/${id}/piles/${name}?${password}`);
 	}
-	addPile(id, name, cards, password) {
+	addPile(id: String, name: String, cards: String, password: String) {
 		return this.axios.get(`/decks/${id}/piles/${name}/add?${cards}${password}`);
 	}
-	shufflePile(id, name, password) {
+	shufflePile(id: String, name: String, password: String) {
 		return this.axios.get(`/decks/${id}/piles/${name}/shuffle?${password}`)
 	}
-	drawPile(id, name, amount, password) {
+	drawPile(id: String, name: String, amount: Number, password: String) {
 		return this.axios.get(`/decks/${id}/piles/${name}/draw?amount=${amount}&${password}`);
 	}
-	drawBottomPile(id, name, amount, password) {
+	drawBottomPile(id: String, name: String, amount: Number, password: String) {
 		return this.axios.get(`/decks/${id}/piles/${name}/draw/bottom?amount=${amount}&${password}`)
 	}
 }
 
-module.exports = API;
+export default API;

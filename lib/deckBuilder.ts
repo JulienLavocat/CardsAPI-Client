@@ -1,43 +1,48 @@
-const CardsAPIError = require("./error");
-const Deck = require("./deck");
+import CardsAPIError from "./error";
+import API from "./api";
+import Deck from "./deck";
 
 class DeckBuilder {
-	constructor(api, deckType) {
+
+	api: API;
+	deckType: String;
+	count: Number;
+	shuffled: Boolean;
+	cards: String[];
+	password: String;
+
+	constructor(api: API, deckType: String) {
 		this.api = api;
 		this.deckType = deckType;
 		this.count = 1;
 		this.shuffled = false;
 	}
 
-	cards(cards) {
+	fromCards(cards: String[]): DeckBuilder {
 		this.cards = cards;
 		return this;
 	}
-	deckCount(deckCount) {
+	deckCount(deckCount: Number): DeckBuilder {
 		this.count = deckCount;
 		return this;
 	}
-	shuffle() {
-		this.shuffled = true;
+	shuffle(): DeckBuilder {
+		this.shuffled = !this.shuffled;
 		return this;
 	}
-	unshuffled() {
-		this.shuffled = false;
-		return this;
-	}
-	password(password) {
-		this.pwd = "&password=" + password;
+	setPassword(password: String): DeckBuilder {
+		this.password = "&password=" + password;
 		return this;
 	}
 
-	buildQueryParams() {
+	buildQueryParams(): String {
 		return `?deckType=${this.deckType}&deckCount=${this.count}&shuffle=${
 			this.shuffled
 		}\
-${this.pwd ? this.pwd : ""}\
+${this.password ? this.password : ""}\
 ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 	}
-	buildCardsQuery() {
+	buildCardsQuery(): String {
 		if (!this.cards)
 			throw new CardsAPIError(
 				"NO_CARDS_PROVIDED",
@@ -53,14 +58,14 @@ ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 		return query.substring(0, query.length - 1);
 	}
 
-	async build() {
+	async build(): Promise<Deck> {
 		return new Deck(
 			this.api,
 			(await this.api.newDeck(this.buildQueryParams())).deck,
-			this.pwd
-		);
+			this.password
+		);;
 	}
-	async fromId(id, password) {
+	async fromId(id: String, password?: String): Promise<Deck> {
 		if (password) password = "&password=" + password;
 		return new Deck(
 			this.api,
@@ -70,4 +75,4 @@ ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 	}
 }
 
-module.exports = DeckBuilder;
+export default DeckBuilder;

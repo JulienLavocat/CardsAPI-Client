@@ -1,5 +1,9 @@
 class CardsAPIError extends Error {
-	constructor(code, message, details) {
+
+	code: any;
+	details: any;
+
+	constructor(code: any, message: any, details?: any) {
 		super(message);
 		this.code = code;
 		if(details)
@@ -7,4 +11,4 @@ class CardsAPIError extends Error {
 	}
 }
 
-module.exports = CardsAPIError;
+export default CardsAPIError;

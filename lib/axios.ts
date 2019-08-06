@@ -1,16 +1,19 @@
-const axios = require("axios");
-const CardError = require("./error");
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import CardError from "./error";
 
 //TODO: use baseUrl property
 
 class Axios {
-	constructor(url) {
+
+	axios: AxiosInstance;
+
+	constructor(url: string) {
 		this.axios = axios.create({
 			baseURL: url
 		});
 	}
 
-	async get(url, config) {
+	async get(url: string, config?: any): Promise<any> {
 		url = encodeURI(url);
 		try {
 			const result = await this.axios.get(url, config);
@@ -31,4 +34,4 @@ class Axios {
 	}
 }
 
-module.exports = Axios;
+export default Axios;
