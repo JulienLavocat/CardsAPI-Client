@@ -1,7 +1,5 @@
-import API from "./lib/api";
-import CardsClient from "./lib/client";
-import Deck from "./lib/deck";
-import Pile from "./lib/pile";
-import CardsAPIError from "./lib/error";
-
-export default CardsClient;
+export * from "./lib/api";
+export * from "./lib/client";
+export * from "./lib/deck";
+export * from "./lib/pile";
+export * from "./lib/error";

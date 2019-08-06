@@ -1,3 +1,3 @@
-import Client from "../index";
+import {CardsClient, API} from "..";
 
-const cc = new Client("");
+const cc = new CardsClient("").;

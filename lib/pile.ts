@@ -1,14 +1,14 @@
-import API from "./api";
+import {API} from "./api";
 
-class Pile {
+export class Pile {
 
 	api: API;
-	deckId: String;
-	name: String;
-	password: String;
-	remaining: Number;
+	deckId: string;
+	name: string;
+	password: string;
+	remaining: number;
 
-	constructor(api: API, deckId: String, name: String, opts: any, password: String) {
+	constructor(api: API, deckId: string, name: string, opts: any, password: string) {
 		this.api = api;
 		this.deckId = deckId;
 		this.name = name;
@@ -16,7 +16,7 @@ class Pile {
 		this.remaining = opts.remaining;
 	}
 
-	async add(cards: String[] | String): Promise<Pile> {
+	async add(cards: string[] | string): Promise<Pile> {
 		const result = await this.api.addPile(this.deckId,
 			this.name,
 			buildCardsQuery(cards),
@@ -31,19 +31,19 @@ class Pile {
 		this.remaining = res.pile.remaining;
 		return this;
 	}
-	async draw(amount: Number = 1): Promise<String[]> {
+	async draw(amount: number = 1): Promise<string[]> {
 		const res = await this.api.drawPile(this.deckId, this.name, amount, this.password);
 		this.remaining = res.remaining;
 		return res.cards;
 	}
-	async drawBottom(amount: Number = 1): Promise<String[]> {
+	async drawBottom(amount: number = 1): Promise<string[]> {
 		const res = await this.api.drawBottomPile(this.deckId, this.name, amount, this.password);
 		this.remaining = res.remaining;
 		return res.cards;
 	}
 }
 
-function buildCardsQuery(cards: any): String {
+function buildCardsQuery(cards: any): string {
 	if(cards.constructor !== Array)
 		return `&cards=${cards}`;
 
@@ -53,5 +53,3 @@ function buildCardsQuery(cards: any): String {
 	});
 	return query.slice(0, query.length - 1);
 }
-
-export default Pile;

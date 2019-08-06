@@ -1,43 +1,44 @@
-import Axios from "./axios";
+import {Axios} from "./axios";
 
-class API {
+/**
+ * Low-level api wrapper
+ */
+export class API {
 
 	axios: Axios;
 
-	constructor(url) {
+	constructor(url: string) {
 		this.axios = new Axios(url);
 	}
 
-	newDeck(query: String) {
+	newDeck(query: string) {
 		return this.axios.get(`/decks/new${query}`);
 	}
-	getDeck(id: String, password: String) {
+	getDeck(id: string, password: string) {
 		return this.axios.get(`/decks/${id}?${password}`);
 	}
-	shuffleDeck(id: String, password: String) {
+	shuffleDeck(id: string, password: string) {
 		return this.axios.get(`/decks/${id}/shuffle?${password}`)
 	}
-	drawDeck(id: String, amount: Number, password: String) {
+	drawDeck(id: string, amount: number, password: string) {
 		return this.axios.get(`/decks/${id}/draw?amount=${amount}&${password}`);
 	}
-	drawBottomDeck(id: String, amount: Number, password: String) {
+	drawBottomDeck(id: string, amount: number, password: string) {
 		return this.axios.get(`/decks/${id}/draw/bottom?amount=${amount}&${password}`);
 	}
-	getPile(id: String, name: String, password: String) {
+	getPile(id: string, name: string, password: string) {
 		return this.axios.get(`/decks/${id}/piles/${name}?${password}`);
 	}
-	addPile(id: String, name: String, cards: String, password: String) {
+	addPile(id: string, name: string, cards: string, password: string) {
 		return this.axios.get(`/decks/${id}/piles/${name}/add?${cards}${password}`);
 	}
-	shufflePile(id: String, name: String, password: String) {
+	shufflePile(id: string, name: string, password: string) {
 		return this.axios.get(`/decks/${id}/piles/${name}/shuffle?${password}`)
 	}
-	drawPile(id: String, name: String, amount: Number, password: String) {
+	drawPile(id: string, name: string, amount: number, password: string) {
 		return this.axios.get(`/decks/${id}/piles/${name}/draw?amount=${amount}&${password}`);
 	}
-	drawBottomPile(id: String, name: String, amount: Number, password: String) {
+	drawBottomPile(id: string, name: string, amount: number, password: string) {
 		return this.axios.get(`/decks/${id}/piles/${name}/draw/bottom?amount=${amount}&${password}`)
 	}
 }
-
-export default API;

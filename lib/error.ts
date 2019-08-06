@@ -1,4 +1,4 @@
-class CardsAPIError extends Error {
+export class CardsAPIError extends Error {
 
 	code: any;
 	details: any;
@@ -10,5 +10,3 @@ class CardsAPIError extends Error {
 			this.details = details;
 	}
 }
-
-export default CardsAPIError;

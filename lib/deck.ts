@@ -1,18 +1,18 @@
-import API from "./api";
-import Pile from "./pile";
+import {API} from "./api";
+import {Pile} from "./pile";
 
-class Deck {
+export class Deck {
 
 	api: API;
-	type: String;
-	count: Number;
-	remaining: Number;
+	type: string;
+	count: number;
+	remaining: number;
 	shuffled: Boolean;
 	createdAt: Date;
-	id: String;
-	password: String;
+	id: string;
+	password: string;
 
-	constructor(api: API, opts: any, password: String) {
+	constructor(api: API, opts: any, password: string) {
 		this.api = api;
 		this.type = opts.type;
 		this.count = opts.count;
@@ -30,21 +30,19 @@ class Deck {
 		this.shuffled = res.shuffled;
 		return this;
 	}
-	async draw(amount: Number = 1): Promise<String[]> {
+	async draw(amount: number = 1): Promise<string[]> {
 		const res = await this.api.drawDeck(this.id, amount, this.password);
 		this.remaining = res.remaining;
 		return res.cards;
 	}
-	async drawBottom(amount: Number = 1): Promise<String[]> {
+	async drawBottom(amount: number = 1): Promise<string[]> {
 		const res = await this.api.drawBottomDeck(this.id, amount, this.password);
 		this.remaining = res.remaining;
 		return res.cards;
 	}
-	async getPile(name: String): Promise<Pile> {
+	async getPile(name: string): Promise<Pile> {
 		const res = await this.api.getPile(this.id, name, this.password);
 		return new Pile(this.api, this.id, name, res.pile, this.password);
 	}
 
 }
-
-export default Deck;

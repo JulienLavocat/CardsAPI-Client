@@ -1,28 +1,28 @@
-import CardsAPIError from "./error";
-import API from "./api";
-import Deck from "./deck";
+import {CardsAPIError} from "./error";
+import {API} from "./api";
+import {Deck} from "./deck";
 
-class DeckBuilder {
+export class DeckBuilder {
 
 	api: API;
-	deckType: String;
-	count: Number;
+	deckType: string;
+	count: number;
 	shuffled: Boolean;
-	cards: String[];
-	password: String;
+	cards: string[];
+	password: string;
 
-	constructor(api: API, deckType: String) {
+	constructor(api: API, deckType: string) {
 		this.api = api;
 		this.deckType = deckType;
 		this.count = 1;
 		this.shuffled = false;
 	}
 
-	fromCards(cards: String[]): DeckBuilder {
+	fromCards(cards: string[]): DeckBuilder {
 		this.cards = cards;
 		return this;
 	}
-	deckCount(deckCount: Number): DeckBuilder {
+	deckCount(deckCount: number): DeckBuilder {
 		this.count = deckCount;
 		return this;
 	}
@@ -30,19 +30,19 @@ class DeckBuilder {
 		this.shuffled = !this.shuffled;
 		return this;
 	}
-	setPassword(password: String): DeckBuilder {
+	setPassword(password: string): DeckBuilder {
 		this.password = "&password=" + password;
 		return this;
 	}
 
-	buildQueryParams(): String {
+	buildQueryParams(): string {
 		return `?deckType=${this.deckType}&deckCount=${this.count}&shuffle=${
 			this.shuffled
 		}\
 ${this.password ? this.password : ""}\
 ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 	}
-	buildCardsQuery(): String {
+	buildCardsQuery(): string {
 		if (!this.cards)
 			throw new CardsAPIError(
 				"NO_CARDS_PROVIDED",
@@ -65,7 +65,7 @@ ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 			this.password
 		);;
 	}
-	async fromId(id: String, password?: String): Promise<Deck> {
+	async fromId(id: string, password?: string): Promise<Deck> {
 		if (password) password = "&password=" + password;
 		return new Deck(
 			this.api,
@@ -74,5 +74,3 @@ ${this.deckType === "custom" ? this.buildCardsQuery() : ""}`;
 		);
 	}
 }
-
-export default DeckBuilder;

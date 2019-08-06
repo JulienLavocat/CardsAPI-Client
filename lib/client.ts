@@ -1,18 +1,16 @@
-import API from "./api"
-import DeckBuilder from "./deckBuilder";
+import {API} from "./api"
+import {DeckBuilder} from "./deckBuilder";
 
-class Client {
+export class CardsClient {
 
 	api: API;
 
-	constructor(url: String) {
+	constructor(url: string) {
 		this.api = new API(url);
 	}
 
-	createDeck(deckType: String = "standard"): DeckBuilder {
+	createDeck(deckType: string = "standard"): DeckBuilder {
 		return new DeckBuilder(this.api, deckType);
 	}
 
 }
-
-export default Client;

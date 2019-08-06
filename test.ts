@@ -1,4 +1,4 @@
-const CardsClient = require(".");
+import {CardsClient} from ".";
 
 const cardsClient = new CardsClient("https://cards.thebad.xyz");
 
@@ -8,9 +8,9 @@ async function start() {
 	try {
 		let deck = await cardsClient
 			.createDeck("standard")
-			.cards(["J"])
+			.fromCards(["J"])
 			.deckCount(3)
-			.password("test")
+			.setPassword("test")
 			.build();
 
 		const testPile = await deck.getPile("jokers");
@@ -18,7 +18,7 @@ async function start() {
 		await testPile.add(["J", "J"]);
 		console.log(await testPile.draw(3));
 
-		await testPile.add([1, 2, 3, 4, 5, 6]);
+		await testPile.add(["1","2", "3", "4", "5", "6"]);
 		console.log(testPile.remaining);
 
 		await testPile.shuffle();
