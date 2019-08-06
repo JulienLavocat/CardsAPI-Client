@@ -3,7 +3,7 @@ import {Pile} from "./pile";
 
 export class Deck {
 
-	api: API;
+	private api: API;
 	type: string;
 	count: number;
 	remaining: number;

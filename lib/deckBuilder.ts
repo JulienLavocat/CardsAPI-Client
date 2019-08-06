@@ -4,12 +4,12 @@ import {Deck} from "./deck";
 
 export class DeckBuilder {
 
-	api: API;
-	deckType: string;
-	count: number;
-	shuffled: Boolean;
-	cards: string[];
-	password: string;
+	private api: API;
+	private deckType: string;
+	private count: number;
+	private shuffled: Boolean;
+	private cards: string[];
+	private password: string;
 
 	constructor(api: API, deckType: string) {
 		this.api = api;

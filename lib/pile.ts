@@ -2,7 +2,7 @@ import {API} from "./api";
 
 export class Pile {
 
-	api: API;
+	private api: API;
 	deckId: string;
 	name: string;
 	password: string;

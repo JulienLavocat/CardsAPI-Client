@@ -2,7 +2,7 @@ import { API } from "./api";
 import { DeckBuilder } from "./deckBuilder";
 
 export class CardsClient {
-	api: API;
+	private api: API;
 
 	/**
 	 * Creates a new CardsClient, using host as base url
