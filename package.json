@@ -2,9 +2,11 @@
   "name": "cardsapi-client",
   "version": "1.1.1",
   "description": "CardsAPI client",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha tests/*.js"
+    "test": "mocha tests/*.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
